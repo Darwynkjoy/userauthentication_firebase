@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:user_authentication/homepage.dart';
+import 'package:user_authentication/passwordreset.dart';
+import 'package:user_authentication/signup.dart';
 
 class Login extends StatefulWidget{
   @override
@@ -45,42 +47,69 @@ class _loginState extends State<Login>{
       appBar: AppBar(
         title: Text("Login",style: TextStyle(fontSize: 30,color: Colors.white),),
         backgroundColor: Colors.blue,
+        leading: IconButton(onPressed: () {
+          Navigator.pop(context);
+        },icon:  Icon(Icons.arrow_back_ios,color: Colors.white,)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
+            SizedBox(height: 50,),
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10)),
-                  hintText: "Email",
-                  hintStyle: TextStyle(color: Colors.blue,fontSize: 20),
+                  labelText: "Email",
+                  labelStyle: TextStyle(color: Colors.blue,fontSize: 20),
+                  hintText: "Example@email.com",
+                  hintStyle: TextStyle(color: Colors.grey,fontSize: 20),
                   ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10)),
-                  hintText: "Password",
-                  hintStyle: TextStyle(color: Colors.blue,fontSize: 20),
+                  labelText: "Password",
+                  labelStyle: TextStyle(color: Colors.blue,fontSize: 20),
+                  hintText: "Enter your password",
+                  hintStyle: TextStyle(color: Colors.grey,fontSize: 20),
                   ),
             ),
-            SizedBox(height: 10,),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-              onPressed: (){
-                _login();
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Homepage()));
-              }, child: Text("Login",style: TextStyle(fontSize: 20,color: Colors.white),)),
+            SizedBox(height: 20,),
+            Container(
+              height: 40,
+              width: 120,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                ),
+                onPressed: (){
+                  _login();
+                  Navigator.replace(context, oldRoute: ModalRoute.of(context)!, newRoute: MaterialPageRoute(builder: (context)=>Homepage()));
+                }, child: Text("Login",style: TextStyle(fontSize: 25,color: Colors.white),)),
+            ),
             SizedBox(height: 10,),
             GestureDetector(
-              onTap:(){},
-              child:  Text("Forgot password ?",style: TextStyle(fontSize: 16,color: Colors.blue),)),
+              onTap:(){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Forgotpassword()));
+              },
+              child:  Text("Forgot password ?",style: TextStyle(fontSize: 18,color: Colors.blue),)),
+              SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Don't have an Account ?",style: TextStyle(fontSize: 18,color: Colors.black),),
+                SizedBox(width: 10,),
+                GestureDetector(
+                  onTap:(){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Signup()));
+                  },
+                  child:  Text("Signup",style: TextStyle(fontSize: 18,color: Colors.blue),)),
+              ],
+            )
           ],
         ),
       ),

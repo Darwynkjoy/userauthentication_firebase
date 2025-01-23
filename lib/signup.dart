@@ -48,56 +48,63 @@ class _signupState extends State<Signup>{
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
+            SizedBox(height: 50,),
             TextField(
               controller: emailController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10)),
-                  hintText: "Email",
-                  hintStyle: TextStyle(color: Colors.blue,fontSize: 20),
+                  labelText: "Email",
+                  labelStyle: TextStyle(color: Colors.blue,fontSize: 20),
+                  hintText: "Example@email.com",
+                  hintStyle: TextStyle(color: Colors.grey,fontSize: 20),
                   ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
             TextField(
               controller: passwordContoller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10)),
-                  hintText: "Password",
-                  hintStyle: TextStyle(color: Colors.blue,fontSize: 20),
+                  labelText: "Password",
+                  labelStyle: TextStyle(color: Colors.blue,fontSize: 20),
+                  hintText: "Enter your password",
+                  hintStyle: TextStyle(color: Colors.grey,fontSize: 20),
                   ),
             ),
-            SizedBox(height: 10,),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-              onPressed: (){
-                _signUp();
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
-              }, child: Text("Sign up",style: TextStyle(fontSize: 20,color: Colors.white),)),
-              SizedBox(height: 5,),
+            SizedBox(height: 20,),
+            SizedBox(
+              width: 150,
+              height: 40,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                ),
+                onPressed: (){
+                  _signUp();
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+                }, child: Text("Sign up",style: TextStyle(fontSize: 25,color: Colors.white),)),
+            ),
+              SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Already registered ?",style: TextStyle(fontSize: 16,color: Colors.black),),
-                SizedBox(width: 5,),
+                Text("Already registered ?",style: TextStyle(fontSize: 18,color: Colors.black),),
+                SizedBox(width: 10,),
                 GestureDetector(
-                  onTap: (){},
-                  child: Text("Login",style: TextStyle(fontSize: 17,color: Colors.blue),)),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                  },
+                  child: Text("Login",style: TextStyle(fontSize: 18,color: Colors.blue),)),
               ],
             ),
-            SizedBox(height: 5,),
-            GestureDetector(
-              onTap:(){},
-              child:  Text("Forgot password ?",style: TextStyle(fontSize: 16,color: Colors.blue),)),
-              SizedBox(height: 5,),
+            SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: 200,
+                  width: 235,
                   height: 40,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -105,8 +112,11 @@ class _signupState extends State<Signup>{
                     ),
                     onPressed: (){}, child: Row(
                     children: [
-                      Text("sign in "),
-                      Icon(Icons.car_crash)
+                      Text("Sign in with google ",style: TextStyle(fontSize: 18,color: Colors.black),),
+                      Container(
+                        height: 25,
+                        width: 25,
+                        child: Image(image: AssetImage("assets/images/google.png")))
                     ],
                   )),
                 ),

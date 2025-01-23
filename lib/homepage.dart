@@ -21,13 +21,15 @@ class _homepageState extends State<Homepage>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home",style: TextStyle(fontSize: 30,color: Colors.white),),
+        title: Text("Homepage",style: TextStyle(fontSize: 30,color: Colors.white),),
+        centerTitle: true,
         backgroundColor: Colors.blue,
         actions: [
-          IconButton(onPressed: () {
-            
-          },icon: Icon(Icons.logout_outlined,color: Colors.white,size: 30,))
+          IconButton(onPressed: (){
+            Navigator.replace(context, oldRoute: ModalRoute.of(context)!, newRoute: MaterialPageRoute(builder: (context)=>Login()));
+          }, icon: Icon(Icons.logout),color: Colors.white,iconSize: 30,)
         ],
+        leading: Text(''),
       ),
       body: Center(child: Text("homeScreen",style: TextStyle(fontSize: 25,),)),
     );
