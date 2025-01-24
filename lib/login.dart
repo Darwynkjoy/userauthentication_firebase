@@ -20,7 +20,7 @@ class _loginState extends State<Login>{
         password: passwordContoller.text.trim()
         );
         print("User Loggedin");
-        Navigator.replace(context, oldRoute: ModalRoute.of(context)!, newRoute: MaterialPageRoute(builder: (context)=>Homepage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>Homepage()));
     }catch(e){
       print("Login error: $e");
       _showErrorDialog(e.toString());
@@ -58,6 +58,7 @@ class _loginState extends State<Login>{
           children: [
             SizedBox(height: 50,),
             TextField(
+              controller: emailController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10)),
@@ -69,6 +70,7 @@ class _loginState extends State<Login>{
             ),
             SizedBox(height: 20,),
             TextField(
+              controller: passwordContoller,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10)),
