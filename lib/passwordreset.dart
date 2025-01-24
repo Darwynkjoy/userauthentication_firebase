@@ -67,6 +67,7 @@ class _forgotpasswordState extends State<Forgotpassword>{
             Text('''Enter the email associated with your account and we'll\nsend you password reset information sent to''',style: TextStyle(fontSize: 15,color: Colors.black),),
             SizedBox(height: 20,),
             TextField(
+              controller: emailController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10)),
