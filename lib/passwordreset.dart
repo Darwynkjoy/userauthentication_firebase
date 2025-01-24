@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:user_authentication/signup.dart';
 
@@ -8,7 +9,44 @@ class Forgotpassword extends StatefulWidget{
 class _forgotpasswordState extends State<Forgotpassword>{
 
   TextEditingController emailController=TextEditingController();
-  TextEditingController passwordContoller=TextEditingController();
+  bool _isloading=false;
+  String? _errorMessage;
+  
+  Future <void> _sendForgotPasswordResetEmail()async{
+    setState(() {
+      _isloading=true;
+      _errorMessage=null;
+    });
+  try{
+    await FirebaseAuth.instance.sendPasswordResetEmail(
+      email: emailController.text.trim(),
+      );
+      setState(() {
+        _isloading=false;
+      });
+      _ShowDialog("Password reset email sent!.please check your inbox");
+  }on FirebaseAuthException catch(e){
+    setState(() {
+      _isloading=false;
+    });
+    _ShowDialog(e.message ?? "an error occurred");
+  }
+  }
+
+  void _ShowDialog(String message){
+    showDialog(context: context, builder: (context)=>
+      AlertDialog(
+        title: Text("Notification"),
+        content: Text(message),
+        actions: [
+          TextButton(onPressed: (){
+            Navigator.of(context).pop();
+          }, child: Text("OK"))
+        ],
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context){
@@ -46,7 +84,9 @@ class _forgotpasswordState extends State<Forgotpassword>{
                   backgroundColor: Colors.blue,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 ),
-                onPressed: (){}, child: Text("Submit",style: TextStyle(fontSize: 25,color: Colors.white),)),
+                onPressed: (){
+                  _sendForgotPasswordResetEmail();
+                }, child: Text("Submit",style: TextStyle(fontSize: 25,color: Colors.white),)),
             ),
             SizedBox(height: 20,),
             Row(
