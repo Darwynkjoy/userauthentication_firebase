@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:user_authentication/signup.dart';
+import 'package:user_authentication/login.dart';
 
 class Forgotpassword extends StatefulWidget{
   @override
@@ -9,12 +9,12 @@ class Forgotpassword extends StatefulWidget{
 class _forgotpasswordState extends State<Forgotpassword>{
 
   TextEditingController emailController=TextEditingController();
-  bool _isloading=false;
+  bool _isLoading=false;
   String? _errorMessage;
-  
+
   Future <void> _sendForgotPasswordResetEmail()async{
     setState(() {
-      _isloading=true;
+      _isLoading=true;
       _errorMessage=null;
     });
   try{
@@ -22,12 +22,12 @@ class _forgotpasswordState extends State<Forgotpassword>{
       email: emailController.text.trim(),
       );
       setState(() {
-        _isloading=false;
+        _isLoading=false;
       });
       _ShowDialog("Password reset email sent!.please check your inbox");
-  }on FirebaseAuthException catch(e){
+  } on FirebaseAuthException catch(e){
     setState(() {
-      _isloading=false;
+      _isLoading=false;
     });
     _ShowDialog(e.message ?? "an error occurred");
   }
@@ -39,7 +39,8 @@ class _forgotpasswordState extends State<Forgotpassword>{
         title: Text("Notification"),
         content: Text(message),
         actions: [
-          TextButton(onPressed: (){
+          TextButton(
+            onPressed: (){
             Navigator.of(context).pop();
           }, child: Text("OK"))
         ],
@@ -96,7 +97,7 @@ class _forgotpasswordState extends State<Forgotpassword>{
                 SizedBox(width: 5,),
                 GestureDetector(
                   onTap:(){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Signup()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
                   },
                   child:  Text("login ",style: TextStyle(fontSize: 18,color: Colors.blue),)),
                   Text("?",style: TextStyle(fontSize: 18,color: Colors.black),),

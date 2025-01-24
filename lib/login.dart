@@ -20,6 +20,7 @@ class _loginState extends State<Login>{
         password: passwordContoller.text.trim()
         );
         print("User Loggedin");
+        Navigator.replace(context, oldRoute: ModalRoute.of(context)!, newRoute: MaterialPageRoute(builder: (context)=>Homepage()));
     }catch(e){
       print("Login error: $e");
       _showErrorDialog(e.toString());
@@ -88,7 +89,6 @@ class _loginState extends State<Login>{
                 ),
                 onPressed: (){
                   _login();
-                  Navigator.replace(context, oldRoute: ModalRoute.of(context)!, newRoute: MaterialPageRoute(builder: (context)=>Homepage()));
                 }, child: Text("Login",style: TextStyle(fontSize: 25,color: Colors.white),)),
             ),
             SizedBox(height: 10,),

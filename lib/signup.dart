@@ -17,6 +17,7 @@ class _signupState extends State<Signup>{
         email: emailController.text.trim(),
         password: passwordContoller.text.trim());
         print("User signed up");
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
     }catch(e){
       print("Signup error: $e");
     }
@@ -83,7 +84,6 @@ class _signupState extends State<Signup>{
                 ),
                 onPressed: (){
                   _signUp();
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
                 }, child: Text("Sign up",style: TextStyle(fontSize: 25,color: Colors.white),)),
             ),
               SizedBox(height: 20,),
