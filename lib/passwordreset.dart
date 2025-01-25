@@ -9,25 +9,25 @@ class Forgotpassword extends StatefulWidget{
 class _forgotpasswordState extends State<Forgotpassword>{
 
   TextEditingController emailController=TextEditingController();
-  bool _isLoading=false;
-  String? _errorMessage;
+  bool isLoading=false;
+  String? errorMessage;
 
   Future <void> _sendForgotPasswordResetEmail()async{
     setState(() {
-      _isLoading=true;
-      _errorMessage=null;
+      isLoading=true;
+      errorMessage=null;
     });
   try{
     await FirebaseAuth.instance.sendPasswordResetEmail(
       email: emailController.text.trim(),
       );
       setState(() {
-        _isLoading=false;
+        isLoading=false;
       });
       _ShowDialog("Password reset email sent!.please check your inbox");
   } on FirebaseAuthException catch(e){
     setState(() {
-      _isLoading=false;
+      isLoading=false;
     });
     _ShowDialog(e.message ?? "an error occurred");
   }
@@ -52,6 +52,7 @@ class _forgotpasswordState extends State<Forgotpassword>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Reset your password",style: TextStyle(fontSize: 30,color: Colors.white),),
         backgroundColor: Colors.blue,

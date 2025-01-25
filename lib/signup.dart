@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:user_authentication/login.dart';
 
 class Signup extends StatefulWidget{
@@ -23,7 +24,7 @@ class _signupState extends State<Signup>{
     }
   }
 
-  void _showErrorDialog(String message){
+  void showErrorDialog(String message){
     showDialog(context: context,
     builder: (BuildContext context)=>AlertDialog(
       title: Text("Error"),
@@ -38,9 +39,25 @@ class _signupState extends State<Signup>{
     );
   }
 
+  Future<UserCredential?> loginWithGoogle()async{
+    try{
+      final GoogleSignIn googleSignIn=GoogleSignIn(
+        clientId: "514930643531-qd0497a7la860nfdcgnvn3gt76k1knlo.apps.googleusercontent.com");
+      final googleUser=await googleSignIn.signIn();
+      final googleauth=await googleUser?.authentication;
+      final cred=GoogleAuthProvider.credential(
+        idToken: googleauth?.idToken,accessToken: googleauth?.accessToken);
+        return await FirebaseAuth.instance.signInWithCredential(cred);
+    }catch(e){
+      print(e.toString());
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Sign up",style: TextStyle(fontSize: 30,color: Colors.white),),
         backgroundColor: Colors.blue,
@@ -109,8 +126,11 @@ class _signupState extends State<Signup>{
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                      backgroundColor: Colors.white
                     ),
-                    onPressed: (){}, child: Row(
+                    onPressed: (){
+                      loginWithGoogle();
+                    }, child: Row(
                     children: [
                       Text("Sign in with google ",style: TextStyle(fontSize: 18,color: Colors.black),),
                       Container(

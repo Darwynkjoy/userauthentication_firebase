@@ -8,7 +8,7 @@ class Homepage extends StatefulWidget{
 }
 class _homepageState extends State<Homepage>{
 
-  void _logOut()async{
+  void logOut()async{
     try{
       await FirebaseAuth.instance.signOut();
       Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
@@ -20,6 +20,7 @@ class _homepageState extends State<Homepage>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Homepage",style: TextStyle(fontSize: 30,color: Colors.white),),
         centerTitle: true,
